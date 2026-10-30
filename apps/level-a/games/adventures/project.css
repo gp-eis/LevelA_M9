@@ -1,0 +1,120 @@
+/* Week 1 project shell: colorful worlds, tactile controls and generated sprites. */
+[hidden]{display:none!important}
+body.in-game #activity{background:radial-gradient(ellipse at 15% 95%,#ffe09c,transparent 65%),#fff0be;font-family:var(--font-friendly,'Trebuchet MS',sans-serif)}
+body.in-game[data-world=english] #activity{background:radial-gradient(ellipse at 15% 95%,#ffe09c,transparent 65%),#fff0be}
+body.in-game[data-world=math] #activity{background:radial-gradient(ellipse at 12% 90%,#a4e8d0,transparent 65%),#e0fff0}
+body.in-game[data-world=phonics] #activity{background:radial-gradient(ellipse at 12% 90%,#dac4ff,transparent 65%),#f0e7ff}
+.in-game .back-button,.in-game .restart-button,.in-game .game-tools .icon-button{border-radius:22px;border:3px solid white;box-shadow:0 5px 0 #207c8399;background:linear-gradient(#8cebd6,#36c0b2);color:#184d50}
+.in-game .restart-button{background:linear-gradient(#fff190,#ffc748);box-shadow:0 5px 0 #c78e29}
+.in-game .next-button,.math-action{background:linear-gradient(#ffab64,#f47b2f)!important;color:#fff!important;border:3px solid #fff!important;box-shadow:0 5px 0 #b25719!important;border-radius:22px!important}
+.in-game .activity-heading h1{color:#24598c;text-shadow:0 2px white;font-weight:800}
+.in-game .play-shell{box-shadow:0 8px 0 #5b8f8540,0 18px 30px #53746820}
+.toy-sprite{display:inline-block;background:url(assets/toys-3d.png) no-repeat;background-size:500% auto;width:100%;height:100%;aspect-ratio:1;filter:drop-shadow(0 5px 3px #624d3033);pointer-events:none}
+.apple-progress-item img{width:100%;height:100%;object-fit:contain}
+.in-game[data-game=collect] .stage{container-type:size;background:#c9f2df}
+@media(min-width:601px){.collect-world{width:min(100cqw,133.333cqh);flex:none;background-size:100% 100%;overflow:hidden}.collect-world .collect-basket{top:64%;width:39%;height:25%}.collect-world .goal-card{top:3%;padding:3px 12px;min-height:40px}.collect-world .tree-apple{width:48px}.collect-world .math-action{bottom:2%;min-height:36px;padding:5px 14px}.collect-world .basket-fruit .math-object{max-width:40px}}
+.pattern-supply .toy-sprite{width:65px;height:65px;display:block;margin:auto}
+.math-object>img{width:100%;height:100%;object-fit:contain;pointer-events:none;user-select:none}
+.goal-card>img{width:45px;height:45px;object-fit:contain}.quantity-apples img{width:100%;height:100%;object-fit:contain}
+.pattern-fixed,.pattern-slot{background:linear-gradient(145deg,#fff,#ffefcf);box-shadow:inset 0 3px 2px white,0 5px 0 #ac8649,0 9px 9px #67462e30}
+.pattern-slot.filled{animation:toy-pop .3s ease-out}
+@keyframes toy-pop{50%{transform:translateY(-8px) scale(1.08)}}
+.maze-picker{display:flex;gap:8px;justify-content:center;align-items:center;padding:4px;flex-wrap:wrap}.maze-picker button{border:3px solid white;background:#e5f9ff;box-shadow:0 4px 0 #479da6;color:#205a70;border-radius:16px;padding:6px 13px;font:700 15px inherit;cursor:pointer}.maze-picker button[aria-pressed=true]{background:#ffe079;box-shadow:0 4px 0 #c28d24}
+.maze-wrap{display:grid;grid-template-rows:42px minmax(0,1fr);height:100%;width:100%}.maze-wrap .golf-game{min-height:0}
+.dots-board .star-object{position:absolute;left:15%;top:10%;width:70%;height:55%;object-fit:contain;filter:drop-shadow(0 7px 3px #405f6630)}
+.dots-board.is-complete .star-object{animation:happy-star 1s ease-in-out infinite alternate}
+@keyframes happy-star{to{transform:translateY(-8px) rotate(3deg)}}
+.in-game .activity-top .category-badge{pointer-events:none}
+@media(max-width:600px){.in-game .activity-top .category-badge{display:none}.in-game .back-button{padding:7px 10px}.in-game .activity-heading h1{font-size:22px}.in-game .mission p{font-size:12px}.maze-picker button{min-height:32px;padding:4px 9px}.toy-sprite{filter:drop-shadow(0 3px 2px #624d3033)}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;scroll-behavior:auto!important}}
+
+.reward-modal{position:fixed;inset:0;z-index:2500;display:grid;place-items:center;padding:16px;background:#19365cc9}
+.reward-dialog{position:relative;width:min(620px,100%);max-height:calc(100svh - 32px);overflow:auto;padding:24px 18px;border:6px solid white;border-radius:30px;background:linear-gradient(#fff8d5,#e2f7ff);text-align:center;box-shadow:0 10px 0 #6ca8c1}
+.reward-dialog h2{color:#8a58b5;margin:6px 42px 18px;font-size:clamp(1.6rem,5vw,2.3rem)}
+.reward-dialog video{display:block;width:100%;max-height:55svh;object-fit:contain;border-radius:20px;background:#fff}
+.reward-dialog button{min-height:48px;margin:14px 5px 0;padding:10px 18px;border:3px solid white;border-radius:20px;background:#ffd367;color:#77531d;box-shadow:0 4px 0 #d6a34a;font-weight:900;cursor:pointer}
+.reward-dialog .reward-close{position:absolute;top:8px;right:8px;width:44px;min-height:44px;margin:0;padding:0;background:#ff94ac;color:#85354e;font-size:1.5rem}
+.reward-dialog .reward-done{background:#a9e8c6;color:#2c7353;box-shadow:0 4px 0 #68b792}
+.reward-fallback{font-size:2rem;color:#8964bd}
+
+/* Focus the two portrait activities on their playable artwork. */
+.in-game:is([data-game=coloring],[data-game=connecting]) .play-shell{max-width:1050px;justify-self:center}
+.in-game:is([data-game=coloring],[data-game=connecting]) .mission-number{display:none}
+.in-game:is([data-game=coloring],[data-game=connecting]) .stage{background:#fff4dd}
+.paint-game,.connect-game{grid-template-columns:126px minmax(0,1fr);grid-template-rows:minmax(0,1fr) 52px;align-items:center}
+.paint-palette,.connect-players{grid-column:1;grid-row:1/3;height:100%;box-sizing:border-box;flex-direction:column;align-items:stretch;justify-content:center;gap:4px;padding:8px}
+.paint-palette{display:grid;grid-template-columns:repeat(2,1fr);align-content:center}
+.paint-palette button{min-height:54px;padding:3px}
+.connect-players button{flex-direction:column;justify-content:center;min-height:80px}
+.paint-scene,.connect-board{grid-column:2;grid-row:1;max-width:100%;align-self:center;overflow:hidden;position:relative;aspect-ratio:auto}
+.paint-scene canvas{position:absolute;left:0;top:-26.47%;width:100%;height:132.353%}
+.paint-tools,.connect-footer{grid-column:2;grid-row:2;align-self:stretch;flex-wrap:wrap;gap:8px;padding:4px}
+@media(max-width:750px){
+ .paint-game,.connect-game{grid-template-columns:minmax(0,1fr);grid-template-rows:60px minmax(0,1fr) 50px}
+ .paint-palette,.connect-players{grid-column:1;grid-row:1;display:flex;flex-direction:row;gap:2px;padding:3px;align-items:center}
+ .paint-palette button{min-height:48px;flex:1;padding:1px;min-width:0}
+ .paint-palette button span{width:25px;height:25px}
+ .connect-players button{min-height:48px;flex:1;flex-direction:row;padding:3px}
+ .paint-scene,.connect-board{grid-column:1;grid-row:2}
+ .paint-tools,.connect-footer{grid-column:1;grid-row:3}
+ .in-game:is([data-game=coloring],[data-game=connecting]) .mission{padding:8px 10px}
+ .in-game:is([data-game=coloring],[data-game=connecting]) .mission h2{font-size:17px}
+ .in-game:is([data-game=coloring],[data-game=connecting]) .mission p{font-size:12px}
+}
+
+@media(min-width:751px){.in-game:is([data-game=coloring],[data-game=connecting]) .play-shell{max-width:clamp(550px,calc((100dvh - 290px)*1.06 + 134px),1050px)}}
+
+@media(max-width:750px){.paint-scene canvas{top:0;height:100%}}
+
+/* Keep the coloring scene whole; use the desktop sidebar for instructions. */
+.in-game[data-game=coloring] .paint-scene canvas{position:static;top:auto;width:100%;height:100%}
+@media(min-width:751px){
+ .in-game[data-game=coloring] .play-shell{max-width:none;grid-template-columns:240px minmax(0,1fr);grid-template-rows:minmax(0,1fr) auto;position:relative}
+ .in-game[data-game=coloring] .mission{grid-column:1;grid-row:1;align-self:start;flex-wrap:wrap;padding:18px;gap:12px;border:0}
+ .in-game[data-game=coloring] .mission h2{font-size:23px}
+ .in-game[data-game=coloring] .mission>div:nth-child(2){flex-basis:100%}
+ .in-game[data-game=coloring] .stage{grid-column:2;grid-row:1/3}
+ .in-game[data-game=coloring] .paint-game{display:block;position:static}
+ .in-game[data-game=coloring] .paint-scene{display:block;margin:0 auto;overflow:visible}
+ .in-game[data-game=coloring] .paint-palette{position:absolute;left:12px;top:245px;width:216px;height:auto;display:grid;grid-template-columns:repeat(4,1fr);padding:4px;gap:3px}
+ .in-game[data-game=coloring] .paint-palette button{padding:2px;min-width:0;min-height:52px}
+ .in-game[data-game=coloring] .paint-palette button span{width:30px;height:30px}
+ .in-game[data-game=coloring] .paint-tools{position:absolute;left:12px;bottom:100px;width:216px;flex-wrap:wrap;box-sizing:border-box}
+ .in-game[data-game=coloring] .paint-status{order:-1;flex-basis:100%;text-align:center}
+ .in-game[data-game=coloring] .answer-bar{grid-column:1;grid-row:2;padding:12px;flex-wrap:wrap}
+ .in-game[data-game=coloring] .answer-bar p{font-size:13px}
+}
+@media(min-width:751px) and (max-height:750px){
+ .in-game[data-game=coloring] .mission{padding:10px}
+ .in-game[data-game=coloring] .mission h2{font-size:19px}
+ .in-game[data-game=coloring] .mission p{font-size:12px}
+ .in-game[data-game=coloring] .paint-palette{top:185px}
+ .in-game[data-game=coloring] .paint-tools{bottom:75px}
+}
+
+@media(min-width:751px){.in-game[data-game=coloring] .paint-tools,.in-game[data-game=coloring] .paint-palette{grid-column:auto;grid-row:auto}}
+
+/* Path Finder retains its complete arena, with desktop controls alongside. */
+@media(min-width:751px){
+ .in-game[data-game=connecting] .play-shell{max-width:none;grid-template-columns:240px minmax(0,1fr);grid-template-rows:minmax(0,1fr) auto;position:relative}
+ .in-game[data-game=connecting] .mission{grid-column:1;grid-row:1;align-self:start;flex-wrap:wrap;padding:18px;gap:12px;border:0}
+ .in-game[data-game=connecting] .mission h2{font-size:23px}
+ .in-game[data-game=connecting] .mission>div:nth-child(2){flex-basis:100%}
+ .in-game[data-game=connecting] .stage{grid-column:2;grid-row:1/3;background:#fff4dd}
+ .in-game[data-game=connecting] .connect-game{display:block;position:static}
+ .in-game[data-game=connecting] .connect-board{display:block;margin:0 auto;overflow:visible}
+ .in-game[data-game=connecting] .connect-players{position:absolute;grid-column:auto;grid-row:auto;left:12px;top:265px;width:216px;height:auto;display:flex;flex-direction:column;padding:4px;gap:6px}
+ .in-game[data-game=connecting] .connect-players button{min-height:48px;flex-direction:row;font-size:14px}
+ .in-game[data-game=connecting] .connect-footer{position:absolute;grid-column:auto;grid-row:auto;left:12px;bottom:100px;width:216px;flex-wrap:wrap;box-sizing:border-box;padding:8px}
+ .in-game[data-game=connecting] .connect-count{flex-basis:100%;text-align:center}
+ .in-game[data-game=connecting] .answer-bar{grid-column:1;grid-row:2;padding:12px;flex-wrap:wrap}
+ .in-game[data-game=connecting] .answer-bar p{font-size:13px}
+}
+@media(min-width:751px) and (max-height:750px){
+ .in-game[data-game=connecting] .mission{padding:10px;gap:6px}
+ .in-game[data-game=connecting] .mission h2{font-size:19px}
+ .in-game[data-game=connecting] .mission p{font-size:12px}
+ .in-game[data-game=connecting] .connect-players{top:195px;gap:3px}
+ .in-game[data-game=connecting] .connect-players button{min-height:40px}
+ .in-game[data-game=connecting] .connect-footer{bottom:75px}
+}

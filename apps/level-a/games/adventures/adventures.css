@@ -1,0 +1,61 @@
+.in-game[data-game=garden] .stage,.in-game[data-game=cookies] .stage{display:block;padding:0;overflow:hidden}
+.garden-adventure{height:100%;display:grid;grid-template-rows:minmax(0,1fr) 48px}
+.flight-world{position:relative;overflow:hidden;min-height:0;background:#dfefce;cursor:crosshair;outline-offset:-4px}
+.flight-land{position:absolute;width:100%;height:100%;inset:0}
+.nectar-patch,.home-hive{position:absolute;transform:translate(-50%,-50%);border:0;background:none;padding:0;min-width:70px;min-height:75px;cursor:pointer;z-index:2}
+.nectar-patch{width:clamp(88px,13vw,155px);height:clamp(85px,16vh,150px)}
+.nectar-patch svg,.home-hive svg{display:block;width:100%;height:100%;filter:drop-shadow(0 5px 0 #65813c20)}
+.nectar-patch:hover{filter:brightness(1.05)}
+.patch-drops{position:absolute;left:50%;bottom:-9px;transform:translateX(-50%);border:2px solid white;border-radius:12px;padding:3px 8px;background:#fffdf1d9;color:#d5a33e;font-size:14px;white-space:nowrap}
+.home-hive{width:clamp(80px,11vw,135px);height:clamp(80px,17vh,140px)}
+.home-hive>span{position:absolute;bottom:-11px;left:50%;transform:translateX(-50%);background:#fff9dd;padding:4px 10px;border-radius:9px;color:#9f7535;font-size:11px;font-weight:800}
+.home-hive.hive-ready{filter:drop-shadow(0 0 15px #e7b63e);animation:hiveGlow .9s infinite alternate}
+.home-hive.delivered{filter:drop-shadow(0 0 15px #6b9b64)}
+.flying-bee{position:absolute;width:70px;height:70px;transform:translate(-50%,-60%);z-index:4;pointer-events:none;filter:drop-shadow(0 7px 3px #685b2b24)}
+.flying-bee svg{width:100%;height:100%;transition:transform .1s}
+.flying-bee.in-flight svg{transform:scaleX(var(--face,1));animation:beeBob .25s infinite alternate}
+.bee-cargo{position:absolute;bottom:-7px;left:30px;color:#db9b31;font-size:19px;white-space:nowrap;text-shadow:0 2px white}
+.flight-help{position:absolute;left:14px;bottom:10px;padding:7px 11px;border-radius:12px;background:#ffffffac;font-size:11px;font-weight:700;color:#5d835a;pointer-events:none}
+.flight-hud{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 18px;background:#fcfae7;box-shadow:0 -2px 0 #ffffff9e;font-size:13px;color:#77925e}
+.nectar-meter{display:flex;gap:13px;align-items:center;color:#7f8b62}.nectar-meter strong{color:#64835c}.nectar-meter i{font-style:normal;font-size:20px;color:#d3a644;letter-spacing:4px}.home-delivery{font-size:12px;font-weight:700}
+.delivery-adventure{height:100%;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);grid-template-rows:46px minmax(0,1fr) 95px;gap:12px;padding:12px 22px;background:#f8edd5}
+.delivery-stats{grid-column:1/-1;display:flex;align-items:center;justify-content:center;gap:16px;font-size:14px;color:#98773e}
+.delivery-stats>span{padding:7px 13px;background:#fffaf0;border-radius:13px}.delivery-stats b{font-size:19px;margin-left:7px;color:#6c895e}.delivery-stats .order-ticket{background:#e8dcf4;color:#88699d}
+.bakery-shelf{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:11px;background:#fffaf1;border:4px solid #ead4a7;border-radius:30px;padding:15px;box-shadow:0 5px 0 #d1b68422;min-height:0}
+.shelf-label{font-size:10px;font-weight:800;letter-spacing:.14em;color:#b08a50}
+.cargo-tray{display:grid;grid-template-columns:repeat(4,70px);gap:12px;justify-content:center;align-content:center}
+.cargo-cookie{width:70px;height:70px;min-height:44px;min-width:44px;border:0;background:none;padding:0;border-radius:50%;transition:transform .18s,opacity .18s;cursor:grab}
+.cargo-cookie svg{width:100%;height:100%;filter:drop-shadow(0 4px 0 #be924d)}
+.cargo-cookie.packed{opacity:.2;transform:scale(.8)}
+.cargo-cookie:active{cursor:grabbing}
+.packing-station{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;min-height:0}
+.delivery-box{position:relative;width:160px;height:150px;border:3px dashed transparent;background:none;border-radius:24px;padding:0;min-width:80px;min-height:90px}
+.delivery-box>svg{width:100%;height:100%;filter:drop-shadow(0 6px 1px #b38d5840)}
+.delivery-box.order-ready{filter:drop-shadow(0 0 12px #9eac68)}.delivery-box.drop-ready{border-color:#7d9b64;background:#fff9eb}
+.packed-display{position:absolute;top:37%;left:50%;transform:translateX(-50%);width:100px;display:flex;gap:4px;flex-wrap:wrap;justify-content:center;padding:6px;border-radius:9px;background:#fff7dca8;color:#b17d32;font-size:20px;line-height:1}
+.packed-display:empty{display:none}
+.packed-display span{display:block;width:24px;height:24px}.packed-display span svg{width:100%;height:100%}
+.packing-caption{font-size:12px;color:#a18656;font-weight:700}
+.send-van{border:0;background:#5f987e;color:white;padding:12px 22px;border-radius:15px;box-shadow:0 4px 0 #3e7056;font-size:14px;min-height:46px;white-space:nowrap}.send-van.order-ready{background:#428560}.send-van:disabled{opacity:.85;cursor:default}
+.delivery-street{grid-column:1/-1;position:relative;min-height:0;overflow:hidden;border-radius:16px;background:#dce9c3}
+.delivery-road{position:absolute;bottom:7px;left:0;width:100%;height:26px;background:#d6c6a0;border-top:3px dashed #faf4d8;border-bottom:3px solid #c6b48d}
+.delivery-house{position:absolute;right:8%;bottom:8px;width:95px;height:85px}.delivery-house svg{width:100%;height:100%}.delivery-house>span{position:absolute;right:-50px;bottom:5px;font-size:12px;font-weight:700;color:#668358;max-width:60px}
+.cookie-van{position:absolute;left:4%;bottom:0;width:95px;height:84px;transition:left 1.15s ease-in-out}.cookie-van svg{width:100%;height:100%}.cookie-van.driving{left:75%}
+.delivery-receipt{position:absolute;left:50%;top:10px;transform:translateX(-50%);background:#fff9e6;padding:5px 11px;border-radius:9px;color:#7e8657;font-size:12px;white-space:nowrap}.delivery-receipt:empty{display:none}
+@keyframes beeBob{to{translate:0 -3px}}@keyframes hiveGlow{to{scale:1.04}}
+@media(max-width:600px){
+ .garden-adventure{grid-template-rows:minmax(0,1fr) 45px}.nectar-patch{width:88px;height:91px}.home-hive{width:84px;height:89px}.flying-bee{width:54px;height:54px}.flight-help{left:6px;bottom:7px;font-size:10px;padding:5px 8px}.flight-hud{padding:7px 9px;gap:7px;font-size:11px}.nectar-meter{gap:6px}.nectar-meter i{font-size:16px;letter-spacing:2px}.home-delivery{font-size:10px}
+ .delivery-adventure{grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);grid-template-rows:35px minmax(0,1fr) 70px;gap:10px;padding:10px}.delivery-stats{font-size:10px;gap:5px;justify-content:space-between}.delivery-stats>span{padding:5px 7px}.delivery-stats b{font-size:15px;margin-left:4px}.bakery-shelf{padding:10px 5px;border-width:3px;border-radius:20px;gap:10px}.shelf-label{font-size:8px;letter-spacing:.05em}.cargo-tray{grid-template-columns:repeat(2,48px);gap:9px}.cargo-cookie{width:48px;height:48px}.delivery-box{width:105px;height:112px}.packing-station{gap:7px}.packing-caption{font-size:10px}.send-van{padding:9px 10px;font-size:12px;min-height:44px;white-space:normal;width:100%}.packed-display{width:70px;font-size:15px;padding:4px;gap:3px}.delivery-house{width:72px;height:69px;right:14%}.delivery-house>span{right:-36px;font-size:9px;bottom:3px}.cookie-van{width:75px;height:69px}.cookie-van.driving{left:60%}.delivery-receipt{top:7px;left:31%;font-size:9px;padding:4px 5px}.delivery-road{height:20px;bottom:5px}
+}
+@media(max-height:520px) and (min-width:601px){
+ .garden-adventure{grid-template-rows:minmax(0,1fr) 30px}.flight-hud{padding:3px 12px;font-size:11px}.nectar-meter i{font-size:15px}.home-delivery{font-size:10px}.nectar-patch{width:80px;height:76px}.home-hive{width:72px;height:70px}.patch-drops{font-size:11px;bottom:-3px;padding:2px 5px}.home-hive>span{bottom:-4px;font-size:9px}.flying-bee{width:48px;height:48px}.flight-help{display:none}
+ .delivery-adventure{grid-template-columns:1.3fr 1fr .8fr;grid-template-rows:29px minmax(0,1fr);padding:6px 12px;gap:7px}.delivery-stats{grid-column:1/3;font-size:11px;gap:8px}.delivery-stats>span{padding:4px 9px}.delivery-stats b{font-size:15px}.bakery-shelf{grid-column:1;grid-row:2;padding:6px;border-radius:16px}.shelf-label{display:none}.cargo-tray{grid-template-columns:repeat(4,44px);gap:8px}.cargo-cookie{width:44px;height:44px}.packing-station{grid-column:2;grid-row:2;flex-direction:row;gap:12px}.delivery-box{width:86px;height:86px}.packing-caption{display:none}.packed-display{width:65px;font-size:13px;padding:3px}.send-van{padding:7px 10px;font-size:11px;white-space:normal;min-height:44px;max-width:120px}.delivery-street{grid-column:3;grid-row:1/3}.delivery-house{width:63px;height:59px;right:7%;bottom:14px}.delivery-house>span{bottom:-6px;right:0;font-size:10px}.cookie-van{width:65px;height:57px;bottom:4px}.cookie-van.driving{left:55%}.delivery-road{height:21px;bottom:5px}.delivery-receipt{top:8px;left:50%;font-size:10px;white-space:normal;text-align:center;width:90%}
+}
+@media(prefers-reduced-motion:reduce){.cookie-van{transition:none}.flying-bee.in-flight svg,.home-hive.hive-ready{animation:none}}
+@media(max-width:600px){.packed-display span{width:17px;height:17px}}
+@media(max-height:520px) and (min-width:601px){.packed-display span{width:16px;height:16px}}
+.delivery-house{z-index:2}.cookie-van{z-index:3}.delivery-receipt{z-index:4}
+.cargo-cookie{touch-action:none}
+.cargo-drag-ghost{position:fixed;z-index:100;width:64px;height:64px;transform:translate(-50%,-50%);pointer-events:none;filter:drop-shadow(0 8px 7px #72572455)}
+.cargo-drag-ghost svg{width:100%;height:100%}
+@media(max-width:600px){.delivery-house>span{right:0;bottom:-2px;background:#fff9e5;padding:2px 5px;border-radius:6px;font-size:10px;max-width:none}}
